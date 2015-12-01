@@ -6,14 +6,15 @@
 #include "coroutine.h"
 #include "coevt.h"
 
-void ce_task(task_func func, void *arg)
+int ce_task(task_func func, void *arg)
 {
     int crtn_id;
     if ((crtn_id = ce_coroutine_create(func, arg)) == CE_DUMMY_COROUTINE_ID) {
-        return;
+        return CE_FAILURE;
     }
 
-    ce_coroutine_resume(crtn_id);
+    return CE_SUCCESS;
+    // Don't resume immediately so that can create task within another task
 }
 
 int ce_cur_task()

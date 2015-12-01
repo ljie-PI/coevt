@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 typedef void (*task_func)(void *arg);
-void ce_task(task_func func, void *arg);
+int ce_task(task_func func, void *arg);
 int ce_cur_task();
 
 int ce_listen(int fd, int event);
