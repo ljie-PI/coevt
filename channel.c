@@ -151,6 +151,7 @@ static void blkd_wait(ce_channel *chan, void **data_ptr, int op_type)
     } else {
         enqueue(&(chan->recv_q), ele);
     }
+    ce_coroutine_block();
 }
 
 static void sender_wait(ce_channel *chan)
@@ -269,4 +270,16 @@ void ce_chan_destroy(ce_channel **chan_ptr)
     // because it set the channel pointer to NULL,
     // so that pending tasks can return CE_FAILURE instead of being blocked forever
     *chan_ptr = NULL;
+}
+
+int ce_chan_sendl(ce_channel *chan, long n)
+{
+    return ce_chan_send(chan, (void *)n);
+}
+int ce_chan_recvl(ce_channel *chan, long *p)
+{
+    void *n = NULL;
+    int ret = ce_chan_recv(chan, n);
+    *p = (long)n;
+    return ret;
 }

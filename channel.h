@@ -8,4 +8,7 @@ int ce_chan_send(ce_channel *chan, void *data);
 int ce_chan_recv(ce_channel *chan, void *data);
 void ce_chan_destroy(ce_channel **chan_ptr);
 
+int ce_chan_sendl(ce_channel *chan, long n);
+int ce_chan_recvl(ce_channel *chan, long *p);
+
 #endif

@@ -6,6 +6,7 @@ GTAGS
 core
 libcoevt.so
 echo_server
+echo_server_1
 
 # Object files
 *.o
