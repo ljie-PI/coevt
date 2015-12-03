@@ -79,6 +79,7 @@ void process_io(void *arg)
                 ce_close(cli_fd);
                 break;
             }
+            rd_buf[bytes] = '\0';
             sprintf(wt_buf, "echo from server(coroutine id: %d):\n%s\n",
                     ce_cur_task(), rd_buf);
             ce_write(cli_fd, wt_buf, strlen(wt_buf) + 1);
